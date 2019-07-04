@@ -7,7 +7,7 @@
     tools:context=".SignUpActivity">
 
     <EditText
-        android:id="@+id/editText6"
+        android:id="@+id/editPwd"
         android:layout_width="277dp"
         android:layout_height="42dp"
         android:layout_marginStart="8dp"
@@ -19,10 +19,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText3" />
+        app:layout_constraintTop_toBottomOf="@+id/editName" />
 
     <EditText
-        android:id="@+id/editText5"
+        android:id="@+id/editPwd2"
         android:layout_width="277dp"
         android:layout_height="42dp"
         android:layout_marginStart="8dp"
@@ -34,10 +34,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText6" />
+        app:layout_constraintTop_toBottomOf="@+id/editPwd" />
 
     <EditText
-        android:id="@+id/editText4"
+        android:id="@+id/editID"
         android:layout_width="277dp"
         android:layout_height="42dp"
         android:layout_marginStart="8dp"
@@ -48,7 +48,7 @@
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button3" />
+        app:layout_constraintTop_toBottomOf="@+id/btn_cam" />
 
     <TextView
         android:id="@+id/textView3"
@@ -79,7 +79,7 @@
         app:srcCompat="@android:color/darker_gray" />
 
     <Button
-        android:id="@+id/button3"
+        android:id="@+id/btn_cam"
         android:layout_width="100dp"
         android:layout_height="37dp"
         android:layout_marginStart="8dp"
@@ -92,7 +92,7 @@
         app:layout_constraintTop_toBottomOf="@+id/imageView4" />
 
     <EditText
-        android:id="@+id/editText3"
+        android:id="@+id/editName"
         android:layout_width="277dp"
         android:layout_height="42dp"
         android:layout_marginStart="8dp"
@@ -104,10 +104,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText4" />
+        app:layout_constraintTop_toBottomOf="@+id/editID" />
 
     <Button
-        android:id="@+id/button4"
+        android:id="@+id/btn_SignUpFinal"
         android:layout_width="115dp"
         android:layout_height="55dp"
         android:layout_marginStart="8dp"
@@ -117,6 +117,6 @@
         android:text="회원가입"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText5" />
+        app:layout_constraintTop_toBottomOf="@+id/editPwd2" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

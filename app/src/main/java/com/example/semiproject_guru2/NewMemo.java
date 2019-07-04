@@ -22,7 +22,6 @@ public class NewMemo extends  AppCompatActivity {
     private TabLayout tabLayout2;  // Tab 영역
     private ViewPager viewPager2;  // 표시할 영역
 
-
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -80,5 +79,5 @@ public class NewMemo extends  AppCompatActivity {
         public int getCount() {
             return this.tabSize;
         }
-}
+    }
 }
