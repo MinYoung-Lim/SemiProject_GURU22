@@ -9,8 +9,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Fragment_Memo"></activity>
-        <activity android:name=".TabActivity" />
+        <activity android:name=".Fragment_MemberInfo"></activity>
+        <activity android:name=".NewMemoFragment_Camera" />
+        <activity android:name=".NewMemoFragment_Write" />
+        <activity android:name=".NewMemo" />
+        <activity android:name=".Fragment_Memo" />
+        <activity android:name=".MainTabActivity" />
         <activity android:name=".SignUpActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
