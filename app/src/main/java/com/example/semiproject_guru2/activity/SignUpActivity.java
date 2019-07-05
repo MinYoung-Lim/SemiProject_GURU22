@@ -1,4 +1,4 @@
-package com.example.semiproject_guru2;
+package com.example.semiproject_guru2.activity;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -22,7 +22,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.example.semiproject_guru2.database.Database;
+import com.example.semiproject_guru2.R;
 import com.example.semiproject_guru2.model.MemberModel;
 
 import java.io.File;
@@ -30,29 +30,20 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class SignUpActivity extends AppCompatActivity {
-    private final String TAG = this.getClass().getSimpleName();  //클래스명 획득
-    public static final int VIEW_SAVE = 101;  // 저장화면 식별자
-
     private static final int MY_PERMISSION_CAMERA = 1111;
     private static final int REQ_TAKE_PHOTO = 2222;
     private static final int REQ_TAKE_ALBUM = 3333;
     private static final int REQ_TAKE_IMAGE_CROP = 4444;
 
-    private ImageView imgSignUp;
-
-    //멤버 변수
-    static EditText editID;
-    EditText editName;
-    EditText editPwd;
-    EditText editPwd2;
-
-    Button btnCam;
-    Button btnSignUpFinal;
+    //멤버변수
+    private ImageView mImgProfile;
+    private EditText mEdtId, mEdtName, mEdtPw1, mEdtPw2;
 
     private String mCurrentImageFilePath = null;
     private Uri mProviderUri = null;
     private Uri mPhotoUri = null;
     private Uri mAlbumUri = null;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,58 +52,26 @@ public class SignUpActivity extends AppCompatActivity {
         checkPermission();
 
         setContentView(R.layout.activity_sign_up);
-
-        imgSignUp = findViewById(R.id.imgSignUp);
-        //입력 필드
-        editID = findViewById(R.id.editID);
-        editName = findViewById(R.id.editName);
-        editPwd = findViewById(R.id.editPwd);
-        editPwd2 = findViewById(R.id.editPwd2);
-
-
-
-        //버튼 객체 획득
-        btnCam = findViewById(R.id.btn_cam);
-        btnSignUpFinal = findViewById(R.id.btn_SignUpFinal);
-        // 회원가입 버튼 이벤트
-        btnSignUpFinal.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //저장
-                Log.d(TAG, "id : " + editID.getText());
-                Log.d(TAG, "name : " + editName.getText());
-                Log.d(TAG, "pwd : " + editPwd.getText());
-                Log.d(TAG, "pwd2 : " + editPwd2.getText());
-
-                // 비밀번호 확인 틀린경우, Toast 메시지
-                if (!editPwd.getText().toString().equals(editPwd2.getText().toString()))
-                    //Toast 뿌리기
-                    Toast.makeText(getApplicationContext(), "비밀번호가 일치하지 않습니다.", Toast.LENGTH_LONG).show();
-                else {
-                    MemberModel member = new MemberModel();
-                    member.setId(editID.getText().toString());
-                    member.setName(editName.getText().toString());
-                    member.setPwd(editPwd.getText().toString());
-
-                    //저장
-                    Database db = Database.getInstance(getApplicationContext());
-                    db.setMember(member);
-                    finish();
-                    Toast.makeText(getApplicationContext(), "회원가입이 완료되었습니다.", Toast.LENGTH_SHORT).show();
-
-
-                }
-            }
-        });
-
-        // 사진 찍기 버튼 이벤트
-        btnCam.setOnClickListener(new View.OnClickListener() {
+        mImgProfile = findViewById(R.id.imgProfile);
+        mEdtId = findViewById(R.id.editID);
+        mEdtName = findViewById(R.id.editName);
+        mEdtPw1 = findViewById(R.id.editPwd);
+        mEdtPw2 = findViewById(R.id.editPwd2);
+        //카메라 버튼
+        findViewById(R.id.btn_cam).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 captureCamera();
             }
         });
-    }
+        //회원가입 버튼
+        findViewById(R.id.btn_signup).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                joinProcess();
+            }
+        });
+    }//end onCreate()
 
     //카메라 작업시작
     private void captureCamera() {
@@ -135,6 +94,12 @@ public class SignUpActivity extends AppCompatActivity {
             }
         }
     }
+
+    //회원가입 작업시작
+    private void joinProcess() {
+
+    }
+
 
 
     // 이미지 파일명 생성
@@ -168,6 +133,7 @@ public class SignUpActivity extends AppCompatActivity {
                     || ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.READ_EXTERNAL_STORAGE)
                     || ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.CAMERA)
             ) {
+                //다이얼로 출력
 
             } else {
                 // 권한동의 팝업 표시 요청
@@ -195,6 +161,7 @@ public class SignUpActivity extends AppCompatActivity {
         } // End switch
     }
 
+
     // 카메라, 앨범등의 처리결과
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
@@ -203,7 +170,8 @@ public class SignUpActivity extends AppCompatActivity {
 
             case REQ_TAKE_PHOTO:
                 if (resultCode == Activity.RESULT_OK) {
-                    imgSignUp.setImageURI(mProviderUri); // 사진촬영한 이미지 설정
+
+                    mImgProfile.setImageURI(mProviderUri); // 사진촬영한 이미지 설정
 
                 } else {
                     Toast.makeText(this, "사진촬영을 취소하였습니다.", Toast.LENGTH_LONG).show();
@@ -215,10 +183,11 @@ public class SignUpActivity extends AppCompatActivity {
                     mPhotoUri = data.getData();
                     mAlbumUri = Uri.fromFile(albumFile);
 
-                    imgSignUp.setImageURI(mPhotoUri);   // 앨범에서 선택한 이미지 설정
+                    mImgProfile.setImageURI(mPhotoUri);   // 앨범에서 선택한 이미지 설정
                 }
                 break;
         } // End switch
     }
+
 
 }

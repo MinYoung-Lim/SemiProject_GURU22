@@ -1,4 +1,4 @@
-package com.example.semiproject_guru2;
+package com.example.semiproject_guru2.activity;
 
 import android.os.Bundle;
 
@@ -8,6 +8,9 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
+import com.example.semiproject_guru2.fragment.Fragment_MemberInfo;
+import com.example.semiproject_guru2.fragment.Fragment_Memo;
+import com.example.semiproject_guru2.R;
 import com.google.android.material.tabs.TabLayout;
 
 
