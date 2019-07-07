@@ -1,4 +1,4 @@
-package com.example.semiproject_guru2;
+package com.example.semiproject_guru2.activity;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -9,13 +9,14 @@ import androidx.viewpager.widget.ViewPager;
 
 import android.os.Bundle;
 
+import com.example.semiproject_guru2.R;
 import com.example.semiproject_guru2.fragment.NewMemoFragment_Camera;
 import com.example.semiproject_guru2.fragment.NewMemoFragment_Write;
 import com.google.android.material.tabs.TabLayout;
 
-public class NewMemo extends  AppCompatActivity {
+public class NewMemoActivity extends  AppCompatActivity {
 
-    public NewMemo(){}
+    public NewMemoActivity(){}
     private TabLayout tabLayout2;  // Tab 영역
     private ViewPager viewPager2;  // 표시할 영역
 

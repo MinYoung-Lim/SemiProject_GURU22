@@ -107,7 +107,12 @@ public class CameraCaptureActivity extends AppCompatActivity {
                     MemberBean findMemBean = FileDB.getFindMember(this, memberBean.memId);
                     if( findMemBean != null ) {
                         //해당되는 아이디를 찾았다.
-                        Toast.makeText(this, "입력하신 회원 아이디를 이미 존재 합니다.", Toast.LENGTH_LONG).show();
+                        Toast.makeText(this, "입력하신 회원 아이디는 이미 존재 합니다.", Toast.LENGTH_LONG).show();
+                        return;
+                    }
+                    // 사진을 찍지 않았을 때
+                    if(mPhotoPath==null){
+                        Toast.makeText(this, "사진을 등록해주세요.", Toast.LENGTH_LONG).show();
                         return;
                     }
 
@@ -115,7 +120,7 @@ public class CameraCaptureActivity extends AppCompatActivity {
                     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                     memberBean.memRegDate = sdf.format(new Date());
 
-                    //memberBena 을 파일로 저장한다. ==> JSON 변환후
+                    //memberBean 을 파일로 저장한다. ==> JSON 변환후
                     FileDB.addMember(this, memberBean);
 
                     //회원가입 완료

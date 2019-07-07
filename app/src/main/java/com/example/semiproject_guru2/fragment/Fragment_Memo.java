@@ -3,7 +3,6 @@ package com.example.semiproject_guru2.fragment;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import android.content.Intent;
@@ -13,7 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
-import com.example.semiproject_guru2.NewMemo;
+import com.example.semiproject_guru2.activity.NewMemoActivity;
 import com.example.semiproject_guru2.R;
 
 public class Fragment_Memo extends Fragment {
@@ -29,7 +28,7 @@ public class Fragment_Memo extends Fragment {
         btnNewMemo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(view.getContext(), NewMemo.class);
+                Intent intent = new Intent(view.getContext(), NewMemoActivity.class);
                 startActivity(intent);
             }
         });

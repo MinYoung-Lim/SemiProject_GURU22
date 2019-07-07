@@ -27,7 +27,7 @@
         <activity android:name=".activity.ListViewActivity" /> <!-- <activity android:name=".Fragment_MemberInfo" /> -->
         <!-- <activity android:name=".NewMemoFragment_Camera" /> -->
         <!-- <activity android:name=".NewMemoFragment_Write" /> -->
-        <activity android:name=".NewMemo" /> <!-- <activity android:name=".Fragment_Memo" /> -->
+        <activity android:name=".activity.NewMemoActivity" /> <!-- <activity android:name=".Fragment_Memo" /> -->
         <activity android:name=".activity.MainTabActivity" />
         <activity android:name=".activity.SignUpActivity" />
         <activity android:name=".activity.MainActivity">
