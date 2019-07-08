@@ -22,7 +22,7 @@ public class FragmentMemo extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         // Fragment UI 생성
-        View view = inflater.inflate(R.layout.activity_fragment__memo, container, false);
+        View view = inflater.inflate(R.layout.fragment_memo, container, false);
 
         Button btnNewMemo = view.findViewById(R.id.btn_NewMemo);
         btnNewMemo.setOnClickListener(new View.OnClickListener() {

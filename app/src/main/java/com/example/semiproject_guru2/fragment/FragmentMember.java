@@ -23,7 +23,7 @@ public class FragmentMember extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.activity_member_info, container, false);
+        View view = inflater.inflate(R.layout.fragment_member, container, false);
 
         ImageView imgProfile = view.findViewById(R.id.imgProfile);
         TextView txtMemId = view.findViewById(R.id.edtIdInfo);
