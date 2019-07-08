@@ -57,36 +57,40 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="44dp"
+                android:layout_marginRight="25dp"
                 android:orientation="horizontal">
 
                 <Button
-                    android:id="@+id/button10"
+                    android:id="@+id/btnRevise"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:backgroundTint="#77F5AFAF"
                     android:text="수정"
                     android:textColor="#FAFAFA"
+                    android:textSize="11dp"
                     android:textStyle="bold" />
 
                 <Button
-                    android:id="@+id/button11"
+                    android:id="@+id/btnDel"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:backgroundTint="#77F5AFAF"
                     android:text="삭제"
                     android:textColor="#FAFAFA"
+                    android:textSize="11dp"
                     android:textStyle="bold" />
 
                 <Button
-                    android:id="@+id/button9"
+                    android:id="@+id/btnDetail"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:backgroundTint="#77F5AFAF"
                     android:text="상세보기"
                     android:textColor="#FAFAFA"
+                    android:textSize="11dp"
                     android:textStyle="bold" />
             </LinearLayout>
 

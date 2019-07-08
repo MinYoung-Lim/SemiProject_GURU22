@@ -4,9 +4,11 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.text.TextUtils;
+import android.view.View;
 
 import com.example.semiproject_guru2.bean.MemberBean;
 import com.example.semiproject_guru2.bean.MemoBean;
+import com.example.semiproject_guru2.fragment.FragmentMemo;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
@@ -125,12 +127,29 @@ public class FileDB {
     //기존 메모 교체
     public static void setMemo (Context context, String memId, MemoBean memoBean){
         //TODO
+
     }
 
     //메모 삭제
-    public static void delMemo(Context context, String memId, int memoId){
+    public static void delMemo(Context context, String memId, long memoId){
         //TODO
+        MemberBean findMember = getFindMember(context, memId);
+        if(findMember == null) return;
+        List <MemoBean> memoList = findMember.memoList;
+        if(memoList == null) return;
+
+        for(int i=0; i<memoList.size(); i++) {
+            MemoBean memoBean = memoList.get(i);
+            if(memoBean.memoID == memoId) {
+                memoList.remove(i);
+                break;
+            }
+        }
+        //저장
+        findMember.memoList = memoList;
+        setMember(context, findMember);
     }
+
     //메모 리스트 취득
     public static List<MemoBean> getMemoList(Context context, String memId){
         MemberBean memberBean = getFindMember(context, memId);

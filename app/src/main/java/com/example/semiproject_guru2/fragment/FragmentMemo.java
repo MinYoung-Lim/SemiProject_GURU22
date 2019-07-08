@@ -33,7 +33,7 @@ import java.util.List;
 
 public class FragmentMemo extends Fragment {
 
-    public ListView mLstMemo;
+    public static ListView mLstMemo;
     public static final int SAVE = 1001;
     // 원본 데이터
     List<MemoBean> memoList = new ArrayList<>();
@@ -113,15 +113,27 @@ public class FragmentMemo extends Fragment {
             // 객체 획득
             ImageView imgView = view.findViewById(R.id.imageView);
             TextView txtMemo = view.findViewById(R.id.txt_memo);
+            Button btnDel = view.findViewById(R.id.btnDel);
 
             // 원본에서 i번째 Item 획득
             final MemoBean item = items.get(i);
 
             // 원본 데이터를 UI에 적용
             if(item.memoPicPath != null) {
-                imgView.setImageURI( Uri.fromFile(new File(item.memoPicPath)) );
+                imgView.setImageURI( Uri.fromFile(new File(item.memoPicPath)));
             }
             txtMemo.setText(item.memo);
+
+            btnDel.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    MemberBean memberBean = FileDB.getLoginMember(getActivity());
+                    FileDB.delMemo(getActivity(), memberBean.memId, item.memoID);
+
+                    items = FileDB.getMemoList(getActivity(), memberBean.memId);
+                    notifyDataSetChanged(); //갱신해라
+                }
+            });
 
             return view;  // 완성된 UI 리턴
         }
