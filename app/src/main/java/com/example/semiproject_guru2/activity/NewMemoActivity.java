@@ -8,14 +8,17 @@ import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 import android.os.Bundle;
+import android.widget.Button;
 
 import com.example.semiproject_guru2.R;
-import com.example.semiproject_guru2.fragment.NewMemoFragment_Camera;
-import com.example.semiproject_guru2.fragment.NewMemoFragment_Write;
+import com.example.semiproject_guru2.fragment.FragmentCamera;
+import com.example.semiproject_guru2.fragment.FragmentMemoWrite;
 import com.google.android.material.tabs.TabLayout;
 
 public class NewMemoActivity extends  AppCompatActivity {
 
+
+    public static Button btnSaveMemo;
     public NewMemoActivity(){}
     private TabLayout tabLayout2;  // Tab 영역
     private ViewPager viewPager2;  // 표시할 영역
@@ -24,6 +27,8 @@ public class NewMemoActivity extends  AppCompatActivity {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_memo);
+
+       btnSaveMemo = findViewById(R.id.btnSaveMemo);
 
         tabLayout2 = findViewById(R.id.tabLayout2);
         viewPager2 = findViewById(R.id.viewPager2);
@@ -65,9 +70,9 @@ public class NewMemoActivity extends  AppCompatActivity {
         public Fragment getItem(int position) {
             switch (position){
                 case 0:
-                    return new NewMemoFragment_Write();
+                    return new FragmentMemoWrite();
                 case 1:
-                    return new NewMemoFragment_Camera();
+                    return new FragmentCamera();
             }
 
             return null;

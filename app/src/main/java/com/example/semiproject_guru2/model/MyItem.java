@@ -33,7 +33,7 @@ public class MyItem implements Serializable {
                 '}';
     }
 
-    public MyItem(int imageId, String title, String subTitle, String price) {
+    public MyItem(int imageId, String contents) {
         this.imageId = imageId;
         this.contents = contents;
     }

@@ -1,73 +1,78 @@
 package com.example.semiproject_guru2.activity;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.content.Intent;
 import android.os.Bundle;
-import android.text.TextUtils;
-import android.util.Log;
-import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentPagerAdapter;
+import androidx.viewpager.widget.ViewPager;
+
+import com.example.semiproject_guru2.fragment.FragmentMember;
+import com.example.semiproject_guru2.fragment.FragmentMemo;
 import com.example.semiproject_guru2.R;
-import com.example.semiproject_guru2.bean.MemberBean;
-import com.example.semiproject_guru2.database.FileDB;
-import com.example.semiproject_guru2.model.MemberModel;
+import com.google.android.material.tabs.TabLayout;
+
 
 public class MainActivity extends AppCompatActivity {
-
-
-    //멤버변수 자리
-    private EditText mEdtId, mEdtPw;
+    private TabLayout tabLayout;  // Tab 영역
+    private ViewPager viewPager;  // 표시할 영역
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_tab);
 
-        mEdtId = findViewById(R.id.editID_Login);
-        mEdtPw = findViewById(R.id.editPwd_Login);
-        Button btnLogin = findViewById(R.id.btn_login);
-        Button btnJoin = findViewById(R.id.btn_signup);
+        tabLayout = findViewById(R.id.tabLayout);
+        viewPager = findViewById(R.id.viewPager);
 
-        btnLogin.setOnClickListener(mBtnLoginClick);
-        btnJoin.setOnClickListener(mBtnJoinClick);
+        //Tab 생성
+        tabLayout.addTab(tabLayout.newTab().setText("메모"));
+        tabLayout.addTab(tabLayout.newTab().setText("회원정보"));
+        tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
 
-    }//end onCreate()
-
-    //로그인 버튼 클릭 이벤트
-    private View.OnClickListener mBtnLoginClick = new View.OnClickListener() {
-        @Override
-        public void onClick(View view) {
-            String memId = mEdtId.getText().toString();
-            String memPw = mEdtPw.getText().toString();
-
-            MemberBean memberBean = FileDB.getFindMember(MainActivity.this, memId);
-            if(memberBean == null) {
-                Toast.makeText(MainActivity.this, "해당 아이디는 가입이 되어 있지 않습니다.", Toast.LENGTH_LONG).show();
-                return;
+        // ViewPager 생성
+        MyPagerAdapter adapter = new MyPagerAdapter(getSupportFragmentManager(),
+                tabLayout.getTabCount());
+        viewPager.setAdapter(adapter);
+        viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
+        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                viewPager.setCurrentItem(tab.getPosition());
             }
-            //패스워드 비교
-            if( TextUtils.equals(memberBean.memPw, memPw) ) {
-                FileDB.setLoginMember(MainActivity.this, memberBean); //저장
-                //비밀번호 일치
-                Intent i = new Intent(MainActivity.this, MainTabActivity.class);
-                startActivity(i);
-            } else {
-                Toast.makeText(MainActivity.this, "패스워드가 일치하지 않습니다.", Toast.LENGTH_LONG).show();
-                return;
-            }
-        }
-    };
 
-    //회원가입 버튼 클릭 이벤트
-    private View.OnClickListener mBtnJoinClick = new View.OnClickListener() {
-        @Override
-        public void onClick(View view) {
-            Intent ii = new Intent(MainActivity.this, CameraCaptureActivity.class);
-            startActivity(ii);
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) { }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) { }
+        });
+    }
+
+    static class MyPagerAdapter extends FragmentPagerAdapter {
+        int tabSize;  // TAB 수
+
+        public MyPagerAdapter(FragmentManager fm, int count) {
+            super(fm);
+            this.tabSize = count;  // 탭의 수
         }
-    };
+
+        @Override
+        public Fragment getItem(int position) {
+            switch (position){
+                case 0:
+                    return new FragmentMemo();
+                case 1:
+                    return new FragmentMember();
+            }
+
+            return null;
+        }
+
+        @Override
+        public int getCount() {
+            return this.tabSize;
+        }
+    }
 }

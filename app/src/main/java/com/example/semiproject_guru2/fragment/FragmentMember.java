@@ -18,7 +18,7 @@ import com.example.semiproject_guru2.database.FileDB;
 
 import java.io.File;
 
-public class Fragment_MemberInfo extends Fragment {
+public class FragmentMember extends Fragment {
 
     @Nullable
     @Override

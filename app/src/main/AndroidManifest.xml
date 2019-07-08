@@ -13,7 +13,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activity.CameraCaptureActivity"></activity>
+        <activity android:name=".activity.CameraCaptureActivity" />
 
         <provider
             android:name="androidx.core.content.FileProvider"
@@ -24,14 +24,13 @@
                 android:resource="@xml/file_paths" />
         </provider>
 
-        <activity android:name=".activity.ListViewActivity" /> <!-- <activity android:name=".Fragment_MemberInfo" /> -->
-        <!-- <activity android:name=".NewMemoFragment_Camera" /> -->
-        <!-- <activity android:name=".NewMemoFragment_Write" /> -->
-        <activity android:name=".activity.NewMemoActivity" /> <!-- <activity android:name=".Fragment_Memo" /> -->
-        <activity android:name=".activity.MainTabActivity" />
+        <!-- <activity android:name=".FragmentMember" /> -->
+        <!-- <activity android:name=".FragmentCamera" /> -->
+        <!-- <activity android:name=".FragmentMemoWrite" /> -->
+        <activity android:name=".activity.NewMemoActivity" /> <!-- <activity android:name=".FragmentMemo" /> -->
+        <activity android:name=".activity.MainActivity" />
         <activity android:name=".activity.SignUpActivity" />
-        <activity android:name=".activity.MainActivity">
-
+        <activity android:name=".activity.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
