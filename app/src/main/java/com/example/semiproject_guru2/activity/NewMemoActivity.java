@@ -92,7 +92,7 @@ public class NewMemoActivity extends  AppCompatActivity {
 
         //Log.e("SEMI", "memoStr"+memoStr+", photoPath : " + photoPath, Toast.LENGTH_LONG).show();
 
-        //TODO 파일 DB에 저장처리
+        //TODO 파일 DB에 저장처리!
 
 
 
