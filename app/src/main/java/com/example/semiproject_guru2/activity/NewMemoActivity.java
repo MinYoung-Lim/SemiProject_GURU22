@@ -15,6 +15,9 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.semiproject_guru2.R;
+import com.example.semiproject_guru2.bean.MemberBean;
+import com.example.semiproject_guru2.bean.MemoBean;
+import com.example.semiproject_guru2.database.FileDB;
 import com.example.semiproject_guru2.fragment.FragmentCamera;
 import com.example.semiproject_guru2.fragment.FragmentMemoWrite;
 import com.google.android.material.tabs.TabLayout;
@@ -36,7 +39,6 @@ public class NewMemoActivity extends  AppCompatActivity {
             public void onClick(View view) {
                 switch (view.getId()){
                     case R.id.btnCancel:
-                        //처리
                         finish();
                         break;
                     case R.id.btnSave:
@@ -93,6 +95,13 @@ public class NewMemoActivity extends  AppCompatActivity {
         Toast.makeText(this, "memoStr: " + memoStr + ", photoPath: " + photoPath, Toast.LENGTH_LONG).show();
 
         //TODO 파일DB 에 저장처리
+        MemoBean memobean = new MemoBean();
+        memobean.memo = memoStr;
+        memobean.memoPicPath = photoPath;
+        MemberBean memberBean = FileDB.getLoginMember( this );
+        FileDB.addMemo(this, memberBean.memId, memobean);
+        FileDB.getMemoList(this, memberBean.memId);
+        finish();
 
     }
 

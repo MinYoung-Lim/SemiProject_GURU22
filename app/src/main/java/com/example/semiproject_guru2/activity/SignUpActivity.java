@@ -100,8 +100,6 @@ public class SignUpActivity extends AppCompatActivity {
 
     }
 
-
-
     // 이미지 파일명 생성
     private File createFileName() {
         // 현재 "년월일 시분초"를 기준으로 파일명 생성

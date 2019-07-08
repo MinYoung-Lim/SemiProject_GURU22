@@ -115,8 +115,8 @@ public class FileDB {
             memoList = new ArrayList<>();
         }
         //고유 메모 ID를 생성해준다.
-        MemoBean.memoID = memoList.size() +1;
-        memoList.add(memoBean);
+        MemoBean.memoID = (int) System.currentTimeMillis();
+        memoList.add(0, memoBean);
         findMember.memoList = memoList;
         //저장
         setMember(context, findMember);
