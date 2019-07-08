@@ -40,6 +40,8 @@ public class FragmentMemo extends Fragment {
         });
 
         mLstMemo = view.findViewById(R.id.lstMemo);
+
+
         return view;
     }
 }

@@ -6,7 +6,7 @@ import android.content.SharedPreferences;
 import android.text.TextUtils;
 
 import com.example.semiproject_guru2.bean.MemberBean;
-import com.example.semiproject_guru2.model.MyItem;
+import com.example.semiproject_guru2.bean.MemoBean;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
@@ -36,6 +36,30 @@ public class FileDB {
         SharedPreferences.Editor editor = getSP(context).edit();
         editor.putString("memberList", listStr);
         editor.commit();
+    }
+
+    //기존 멤버 교체
+    public static void setMember(Context context, MemberBean memberBean){
+        //전체 멤버 리스트를 취득한다.
+        List <MemberBean> memberList = getMemberList(context);
+        if(memberList.size() == 0) return;
+
+        for(int i=0; i<memberList.size(); i++){
+            MemberBean bean = memberList.get(i);
+            if (TextUtils.equals(bean.memId, memberBean.memId)){
+                //같은 멤버 ID를 찾았다.
+                memberList.set(i, memberBean);
+                break;
+            }
+        }
+        //새롭게 update된 리스트를 저장한다.
+        String jsonStr = mGson.toJson(memberList);
+
+        SharedPreferences.Editor editor = getSP(context).edit();
+        editor.putString("memberList", jsonStr);
+        editor.commit();
+
+
     }
 
     public static List<MemberBean> getMemberList(Context context) {
@@ -81,69 +105,42 @@ public class FileDB {
         return memberBean;
     }
 
+    //메모를 추가하는 메서드
+    public static void addMemo(Context context, String memId, MemoBean memoBean){
+        MemberBean findMember = getFindMember(context, memId);
+        if(findMember == null) return;
 
-
-    /****************************** 메모 관련 DB *********************************/
-
-    public final static String TBL_ITEM = "ITEM";
-
-    private static FileDB inst;
-    private static SharedPreferences sf = null;  //저장 객체
-
-    private static List<MyItem> items = null;  // 원본데이터
-
-    private FileDB(){}
-
-    public static FileDB getInstance(Context context){
-
-        if (items == null){
-            items = new ArrayList<>();
+        List <MemoBean> memoList = findMember.memoList;
+        if(memoList == null){
+            memoList = new ArrayList<>();
         }
-        if(sf == null)
-            sf = context.getSharedPreferences("MEMO", Activity.MODE_PRIVATE);
-
-        if(inst == null)
-            inst = new FileDB();
-        return inst;
-    }
-
-    // Item 선두에 추가
-    public void addItem(MyItem item){
-        items.add(0,item);
-    }
-    // Item 획득
-    public MyItem getItem(int index){
-        return items.get(index);
-    }
-    // Item 변경
-    public void setItems(int index, MyItem item){
-        items.set(index, item);
-    }
-    // Item 삭제
-    public void removeItem(int index){
-        items.remove(index);
-    }
-    // Items를 SharedPreferences에 저장
-    public void saveItem(){
-        // 객체를 문자열(Json)로 변경
-        String itemString = new GsonBuilder().serializeNulls().create().toJson(items);
+        //고유 메모 ID를 생성해준다.
+        MemoBean.memoID = memoList.size() +1;
+        memoList.add(memoBean);
+        findMember.memoList = memoList;
         //저장
-        SharedPreferences.Editor editor = sf.edit();
-        editor.putString(TBL_ITEM, itemString);  //key, value 형식으로 저장
-        editor.commit();
+        setMember(context, findMember);
     }
 
-    // items 획득
-    public List<MyItem> loadItems(){
-        // SharedPreferences의 Items정보를 문자열로 획득
-        String itemsString = sf.getString(TBL_ITEM, "");
-        if(!itemsString.isEmpty()){
-            // 문자열을 MyItem 배열형태로 변환
-            MyItem[] itemArray = new Gson().fromJson(itemsString, MyItem[].class);
-            // 배열을 ArrayList형태로 변환
-            items = new ArrayList<>(Arrays.asList(itemArray));
+    //기존 메모 교체
+    public static void setMemo (Context context, String memId, MemoBean memoBean){
+        //TODO
+    }
+
+    //메모 삭제
+    public static void delMemo(Context context, String memId, int memoId){
+        //TODO
+    }
+    //메모 리스트 취득
+    public static List<MemoBean> getMemoList(Context context, String memId){
+        MemberBean memberBean = getFindMember(context, memId);
+        if(memberBean == null) return null;
+
+        if( memberBean.memoList == null ) {
+            return new ArrayList<>();
         }
-        return items;
+        else
+            return memberBean.memoList;
     }
 
 }

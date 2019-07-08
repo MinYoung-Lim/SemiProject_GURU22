@@ -31,7 +31,7 @@ public class NewMemoActivity extends  AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_memo);
 
-         View.OnClickListener mBtnClick = new View.OnClickListener(){
+        View.OnClickListener mBtnClick = new View.OnClickListener(){
             @Override
             public void onClick(View view) {
                 switch (view.getId()){
@@ -77,24 +77,22 @@ public class NewMemoActivity extends  AppCompatActivity {
             public void onTabReselected(TabLayout.Tab tab) { }
         });
     }
+    //저장버튼 저장처리
+    private void saveProc() {
 
-
-    //저장 버튼 저장 처리
-    private void saveProc(){
-        //1. 첫번째 fragment의 EditText값을 반환
-        FragmentMemoWrite f0 = (FragmentMemoWrite)mMyPagerAdapter.instantiateItem(viewPager2, 0);
-        //2. 두번째 fragment의 mPhotoPath값을 가져온다
-        FragmentCamera f1 = (FragmentCamera)mMyPagerAdapter.instantiateItem(viewPager2, 1);
+        //1.첫번째 프래그먼트의 EditText 값을 받아온다.
+        FragmentMemoWrite f0 = (FragmentMemoWrite)mMyPagerAdapter.instantiateItem(viewPager2,0);
+        //2.두번째 프래그먼트의 mPhotoPath 값을 가져온다.
+        FragmentCamera f1 = (FragmentCamera)mMyPagerAdapter.instantiateItem(viewPager2,1);
 
         EditText edtWriteMemo = f0.getView().findViewById(R.id.edtWriteMemo);
         String memoStr = edtWriteMemo.getText().toString();
         String photoPath = f1.mPhotoPath;
 
-        //Log.e("SEMI", "memoStr"+memoStr+", photoPath : " + photoPath, Toast.LENGTH_LONG).show();
+        Log.e("SEMI", "memoStr: " + memoStr + ", photoPath: " + photoPath);
+        Toast.makeText(this, "memoStr: " + memoStr + ", photoPath: " + photoPath, Toast.LENGTH_LONG).show();
 
-        //TODO 파일 DB에 저장처리!
-
-
+        //TODO 파일DB 에 저장처리
 
     }
 
@@ -125,5 +123,3 @@ public class NewMemoActivity extends  AppCompatActivity {
         }
     }
 }
-
-

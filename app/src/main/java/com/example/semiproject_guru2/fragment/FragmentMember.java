@@ -4,15 +4,20 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.semiproject_guru2.R;
+import com.example.semiproject_guru2.activity.LoginActivity;
+import com.example.semiproject_guru2.activity.MainActivity;
 import com.example.semiproject_guru2.bean.MemberBean;
 import com.example.semiproject_guru2.database.FileDB;
 
@@ -30,6 +35,7 @@ public class FragmentMember extends Fragment {
         TextView txtMemName = view.findViewById(R.id.edtNameInfo);
         TextView txtMemPw = view.findViewById(R.id.edtPwdInfo);
         TextView txtMemDate = view.findViewById(R.id.txtMemDate);
+        Button btnLogout = view.findViewById(R.id.btnLogout);
 
         //파일DB 에서 가져온다.
         MemberBean memberBean = FileDB.getLoginMember( getActivity() );
@@ -39,6 +45,15 @@ public class FragmentMember extends Fragment {
         txtMemName.setText( "이름 : " + memberBean.memName );
         txtMemPw.setText( "비밀번호 : " + memberBean.memPw );
         txtMemDate.setText( "가입날짜 : " + memberBean.memRegDate );
+
+        btnLogout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(getActivity(), LoginActivity.class);
+                startActivity(i);
+                Toast.makeText(getActivity(),"로그아웃...", Toast.LENGTH_LONG).show();
+            }
+        });
 
         return view;
     }
