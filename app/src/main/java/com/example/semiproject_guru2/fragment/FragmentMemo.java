@@ -114,14 +114,14 @@ public class FragmentMemo extends Fragment {
             ImageView imgView = view.findViewById(R.id.imageView);
             TextView txtMemo = view.findViewById(R.id.txt_memo);
 
-
             // 원본에서 i번째 Item 획득
             final MemoBean item = items.get(i);
 
             // 원본 데이터를 UI에 적용
-//            imgView.setImageURI( Uri.fromFile(new File(item.getMemoPicPath())) );
-            txtMemo.setText(item.getMemo());
-
+            if(item.memoPicPath != null) {
+                imgView.setImageURI( Uri.fromFile(new File(item.memoPicPath)) );
+            }
+            txtMemo.setText(item.memo);
 
             return view;  // 완성된 UI 리턴
         }

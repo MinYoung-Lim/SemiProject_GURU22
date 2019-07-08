@@ -128,7 +128,7 @@ public class CameraCaptureActivity extends AppCompatActivity {
                     finish();
                 }
 
-                private void takePicture() {
+                public void takePicture() {
 
                     Intent i = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 

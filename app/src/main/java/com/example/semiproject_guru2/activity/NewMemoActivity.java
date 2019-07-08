@@ -100,9 +100,7 @@ public class NewMemoActivity extends  AppCompatActivity {
         memobean.memoPicPath = photoPath;
         MemberBean memberBean = FileDB.getLoginMember( this );
         FileDB.addMemo(this, memberBean.memId, memobean);
-        FileDB.getMemoList(this, memberBean.memId);
         finish();
-
     }
 
 
