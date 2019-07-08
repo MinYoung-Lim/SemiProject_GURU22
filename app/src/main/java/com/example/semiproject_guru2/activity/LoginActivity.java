@@ -53,6 +53,7 @@ public class LoginActivity extends AppCompatActivity {
                 //비밀번호 일치
                 Intent i = new Intent(LoginActivity.this, MainActivity.class);
                 startActivity(i);
+                finish();
             } else {
                 Toast.makeText(LoginActivity.this, "패스워드가 일치하지 않습니다.", Toast.LENGTH_LONG).show();
                 return;
@@ -66,6 +67,7 @@ public class LoginActivity extends AppCompatActivity {
         public void onClick(View view) {
             Intent ii = new Intent(LoginActivity.this, CameraCaptureActivity.class);
             startActivity(ii);
+
         }
     };
 }

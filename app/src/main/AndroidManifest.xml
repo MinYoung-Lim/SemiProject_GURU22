@@ -13,6 +13,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".activity.ModifyMemoActivity"></activity>
         <activity android:name=".activity.CameraCaptureActivity" />
 
         <provider
@@ -22,9 +23,7 @@
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_paths" />
-        </provider>
-
-        <!-- <activity android:name=".FragmentMember" /> -->
+        </provider> <!-- <activity android:name=".FragmentMember" /> -->
         <!-- <activity android:name=".FragmentCamera" /> -->
         <!-- <activity android:name=".FragmentMemoWrite" /> -->
         <activity android:name=".activity.NewMemoActivity" /> <!-- <activity android:name=".FragmentMemo" /> -->

@@ -8,7 +8,11 @@ import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.semiproject_guru2.R;
 import com.example.semiproject_guru2.fragment.FragmentCamera;
@@ -17,18 +21,35 @@ import com.google.android.material.tabs.TabLayout;
 
 public class NewMemoActivity extends  AppCompatActivity {
 
-
-    public static Button btnSaveMemo;
     public NewMemoActivity(){}
     private TabLayout tabLayout2;  // Tab 영역
     private ViewPager viewPager2;  // 표시할 영역
+    private MyPagerAdapter mMyPagerAdapter;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_memo);
 
-       btnSaveMemo = findViewById(R.id.btnSaveMemo);
+         View.OnClickListener mBtnClick = new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                switch (view.getId()){
+                    case R.id.btnCancel:
+                        //처리
+                        finish();
+                        break;
+                    case R.id.btnSave:
+                        //처리
+                        saveProc();
+
+                        break;
+                }
+            }
+        };
+
+        findViewById(R.id.btnCancel).setOnClickListener(mBtnClick);
+        findViewById(R.id.btnSave).setOnClickListener(mBtnClick);
 
         tabLayout2 = findViewById(R.id.tabLayout2);
         viewPager2 = findViewById(R.id.viewPager2);
@@ -38,11 +59,10 @@ public class NewMemoActivity extends  AppCompatActivity {
         tabLayout2.addTab(tabLayout2.newTab().setText("사진찍기"));
         tabLayout2.setTabGravity(TabLayout.GRAVITY_FILL);
 
-
         // ViewPager 생성
-        MyPagerAdapter adapter2 = new MyPagerAdapter(getSupportFragmentManager(),
+        mMyPagerAdapter = new MyPagerAdapter(getSupportFragmentManager(),
                 tabLayout2.getTabCount());
-        viewPager2.setAdapter(adapter2);
+        viewPager2.setAdapter(mMyPagerAdapter);
         viewPager2.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout2));
         tabLayout2.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
@@ -57,6 +77,27 @@ public class NewMemoActivity extends  AppCompatActivity {
             public void onTabReselected(TabLayout.Tab tab) { }
         });
     }
+
+
+    //저장 버튼 저장 처리
+    private void saveProc(){
+        //1. 첫번째 fragment의 EditText값을 반환
+        FragmentMemoWrite f0 = (FragmentMemoWrite)mMyPagerAdapter.instantiateItem(viewPager2, 0);
+        //2. 두번째 fragment의 mPhotoPath값을 가져온다
+        FragmentCamera f1 = (FragmentCamera)mMyPagerAdapter.instantiateItem(viewPager2, 1);
+
+        EditText edtWriteMemo = f0.getView().findViewById(R.id.edtWriteMemo);
+        String memoStr = edtWriteMemo.getText().toString();
+        String photoPath = f1.mPhotoPath;
+
+        //Log.e("SEMI", "memoStr"+memoStr+", photoPath : " + photoPath, Toast.LENGTH_LONG).show();
+
+        //TODO 파일 DB에 저장처리
+
+
+
+    }
+
 
     class MyPagerAdapter extends FragmentPagerAdapter {
         int tabSize;  // TAB 수
@@ -84,3 +125,5 @@ public class NewMemoActivity extends  AppCompatActivity {
         }
     }
 }
+
+

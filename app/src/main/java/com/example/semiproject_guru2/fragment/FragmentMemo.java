@@ -11,11 +11,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ListView;
 
 import com.example.semiproject_guru2.activity.NewMemoActivity;
 import com.example.semiproject_guru2.R;
 
 public class FragmentMemo extends Fragment {
+
+    public ListView mLstMemo;
+
+
     public FragmentMemo(){}
     @Override
 
@@ -24,14 +29,17 @@ public class FragmentMemo extends Fragment {
         // Fragment UI 생성
         View view = inflater.inflate(R.layout.fragment_memo, container, false);
 
-        Button btnNewMemo = view.findViewById(R.id.btn_NewMemo);
+        Button btnNewMemo = view.findViewById(R.id.btnNewMemo);
         btnNewMemo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //새메모 화면으로 이동
                 Intent intent = new Intent(view.getContext(), NewMemoActivity.class);
                 startActivity(intent);
             }
         });
+
+        mLstMemo = view.findViewById(R.id.lstMemo);
         return view;
     }
 }

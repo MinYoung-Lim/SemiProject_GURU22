@@ -15,6 +15,8 @@ import com.example.semiproject_guru2.R;
 
 public class FragmentCamera extends Fragment {
 
+    //사진이 저장된 단말기상의 실제 경로
+    public String mPhotoPath = "/sdcard/hello/world.jpg";  //dummy data
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {

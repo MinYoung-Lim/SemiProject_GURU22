@@ -4,12 +4,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="8dp"
-    tools:context=".activity.ListViewActivity">
+    android:padding="8dp">
 
 
     <Button
-        android:id="@+id/btn_NewMemo"
+        android:id="@+id/btnNewMemo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:backgroundTint="#77F5AFAF"
@@ -19,7 +18,7 @@
         android:textStyle="bold" />
 
     <ListView
-        android:id="@+id/listView"
+        android:id="@+id/lstMemo"
         android:layout_width="match_parent"
         android:layout_height="match_parent"></ListView>
 </LinearLayout>
