@@ -11,6 +11,8 @@ import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -26,8 +28,10 @@ import com.example.semiproject_guru2.R;
 import com.example.semiproject_guru2.model.MemberModel;
 
 import java.io.File;
+import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
 
 public class SignUpActivity extends AppCompatActivity {
     private static final int MY_PERMISSION_CAMERA = 1111;
@@ -57,6 +61,9 @@ public class SignUpActivity extends AppCompatActivity {
         mEdtName = findViewById(R.id.editName);
         mEdtPw1 = findViewById(R.id.editPwd);
         mEdtPw2 = findViewById(R.id.editPwd2);
+
+
+
         //카메라 버튼
         findViewById(R.id.btn_cam).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -164,6 +171,9 @@ public class SignUpActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
 
+
+
+
         switch (requestCode) {
 
             case REQ_TAKE_PHOTO:
@@ -184,6 +194,7 @@ public class SignUpActivity extends AppCompatActivity {
                     mImgProfile.setImageURI(mPhotoUri);   // 앨범에서 선택한 이미지 설정
                 }
                 break;
+
         } // End switch
     }
 

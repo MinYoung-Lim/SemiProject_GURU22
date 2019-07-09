@@ -7,6 +7,7 @@ import androidx.core.content.FileProvider;
 import android.Manifest;
 import android.content.Intent;
 import android.content.res.Resources;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
@@ -33,9 +34,12 @@ import com.example.semiproject_guru2.database.FileDB;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.OutputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
+import static java.util.Collections.rotate;
 
 public class CameraCaptureActivity extends AppCompatActivity {
 
@@ -70,6 +74,18 @@ public class CameraCaptureActivity extends AppCompatActivity {
                         @Override
                         public void onClick(View v) {
                             takePicture();
+                        }
+                    });
+
+                    //갤러리 연결
+                    findViewById(R.id.btnGal).setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            Intent intent = new Intent(Intent.ACTION_PICK);
+                            intent.setData(MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                            intent.setType("image/*");
+                            //intent.setAction(Intent.ACTION_GET_CONTENT);
+                            startActivityForResult(intent, 1);
                         }
                     });
 
@@ -296,13 +312,55 @@ public class CameraCaptureActivity extends AppCompatActivity {
                 public void onActivityResult(int requestCode, int resultCode, Intent data) {
                     super.onActivityResult(requestCode, resultCode, data);
 
-                    //카메라로부터 오는 데이터를 취득한다.
-                    if(resultCode == RESULT_OK) {
-                        if(requestCode == REQUEST_IMAGE_CAPTURE) {
-                            sendPicture();
+                    if(resultCode == RESULT_OK){
+                        switch (requestCode){
+                            case 1:
+                                sendPicture(data.getData()); //갤러리에서 가져오기
+                                break;
+                            case REQUEST_IMAGE_CAPTURE:
+                                sendPicture();
+                                break;
                         }
                     }
+
+
+//                    //카메라로부터 오는 데이터를 취득한다.
+//                    if(resultCode == RESULT_OK) {
+//                        if(requestCode == REQUEST_IMAGE_CAPTURE) {
+//                            sendPicture();
+//                        }
+//                    }
                 }
+
+                private void sendPicture(Uri imgUri){
+
+                    mPhotoPath = getRealPathFromURI(imgUri);
+                    ExifInterface exif = null;
+                    try{
+                        exif = new ExifInterface(mPhotoPath);
+                    }catch (IOException e){
+                        e.printStackTrace();
+                    }
+                    int exifOrientation = exif.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_NORMAL);
+                    int exifDegree = exifOrientToDegree(exifOrientation);
+
+                    Bitmap bitmap = BitmapFactory.decodeFile(mPhotoPath);
+                    mImgProfile.setImageBitmap(bitmap);
+
+                }
+
+                private String getRealPathFromURI(Uri contentUri){
+                    int column_index = 0;
+                    String[] proj = {MediaStore.Images.Media.DATA};
+                    Cursor cursor = getContentResolver().query(contentUri, proj, null, null, null);
+                    if(cursor.moveToFirst()){
+                        column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+                    }
+                    return cursor.getString(column_index);
+                }
+
+
+
 
         }
 
