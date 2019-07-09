@@ -141,6 +141,7 @@ public class FragmentCamera extends Fragment {
         mImgMemo.setImageBitmap( rotatedBmp );
 
         Toast.makeText(getActivity(), "사진경로: " + mPhotoPath, Toast.LENGTH_LONG).show();
+
     }
 
     private void saveBitmapToFileCache(Bitmap bitmap, String strFilePath) {

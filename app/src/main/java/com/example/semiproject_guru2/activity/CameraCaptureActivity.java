@@ -193,12 +193,16 @@ public class CameraCaptureActivity extends AppCompatActivity {
                         exifDegree = 0;
                     }
 
-                    Bitmap rotatedBmp = roate(resizedBmp, 0);
+
+                    Bitmap rotatedBmp = roate(resizedBmp, exifDegree);
 
                     //줄어든 이미지를 다시 저장한다
                     saveBitmapToFileCache(rotatedBmp, mPhotoPath);
+
                     mImgProfile.setImageBitmap( rotatedBmp );
+
                     Toast.makeText(this, "사진경로: " + mPhotoPath, Toast.LENGTH_LONG).show();
+
                 }
 
     private void saveBitmapToFileCache(Bitmap bitmap, String strFilePath) {
