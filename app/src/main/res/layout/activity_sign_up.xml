@@ -89,7 +89,8 @@
         android:text="사진찍기"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imgSignUp" />
+        app:layout_constraintTop_toBottomOf="@+id/imgSignUp"
+        android:background="@drawable/button_login"/>
 
     <EditText
         android:id="@+id/editName"
@@ -108,11 +109,12 @@
 
     <Button
         android:id="@+id/btn_SignUpFinal"
-        android:layout_width="115dp"
+        android:layout_width="120dp"
         android:layout_height="55dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="4dp"
         android:layout_marginEnd="8dp"
+        android:background="@drawable/button_login"
         android:backgroundTint="#77F5AFAF"
         android:text="회원가입"
         app:layout_constraintEnd_toEndOf="parent"

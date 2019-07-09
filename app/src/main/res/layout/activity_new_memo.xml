@@ -50,7 +50,9 @@
             android:layout_weight="1"
             android:backgroundTint="#77F5AFAF"
             android:text="저장"
-            android:textSize="20dp" />
+            android:textSize="20dp"
+            android:background="@drawable/button_login"
+            />
 
         <Button
             android:id="@+id/btnCancel"
@@ -61,7 +63,9 @@
             android:layout_weight="1"
             android:backgroundTint="#77F5AFAF"
             android:text="취소"
-            android:textSize="20dp" />
+            android:textSize="20dp"
+            android:background="@drawable/button_login"
+            />
     </LinearLayout>
 
 </LinearLayout>

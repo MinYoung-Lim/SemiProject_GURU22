@@ -74,7 +74,8 @@
                     android:text="수정"
                     android:textColor="#FAFAFA"
                     android:textSize="11dp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    />
 
                 <Button
                     android:id="@+id/btnDel"

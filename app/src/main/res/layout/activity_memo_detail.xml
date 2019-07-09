@@ -50,7 +50,9 @@
             android:layout_weight="1"
             android:backgroundTint="#77F5AFAF"
             android:text="뒤로가기"
-            android:textSize="20dp" />
+            android:textSize="20dp"
+            android:background="@drawable/button_login"
+            />
 
 
     </LinearLayout>
