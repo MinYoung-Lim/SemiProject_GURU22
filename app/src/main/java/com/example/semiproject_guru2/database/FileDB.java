@@ -170,7 +170,7 @@ public class FileDB {
         //TODO
         MemberBean findMember = getFindMember(context, memId);
         List <MemoBean> memoList = findMember.memoList;
-
+        if(memoList==null)return null;
             for (int i = 0; i < memoList.size(); i++) {
                 MemoBean memoBean = memoList.get(i);
                 if (memoBean.memoID == memoId) {

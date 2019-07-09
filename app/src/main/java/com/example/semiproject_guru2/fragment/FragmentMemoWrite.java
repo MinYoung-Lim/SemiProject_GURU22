@@ -38,9 +38,8 @@ public class FragmentMemoWrite extends Fragment {
 
         long memoId = getActivity().getIntent().getLongExtra("memoId", -1);
         MemberBean memberBean = FileDB.getLoginMember( getActivity() );
-        if(FileDB.getMemo(getActivity(),memberBean.memId,memoId)!=null) {
+        if(memoId > 0) {
             MemoBean memoBean = FileDB.getMemo(getActivity(), memberBean.memId, memoId);
-
             if (memoBean != null) {
                 edtWriteMemo.setText(memoBean.memo);
             }
