@@ -132,10 +132,14 @@ public class FragmentCamera extends Fragment {
         } else {
             exifDegree = 0;
         }
+
         Bitmap rotatedBmp = roate(resizedBmp, exifDegree);
-        mImgMemo.setImageBitmap( rotatedBmp );
+
         //줄어든 이미지를 다시 저장한다
-        saveBitmapToFileCache(resizedBmp, mPhotoPath);
+        saveBitmapToFileCache(rotatedBmp, mPhotoPath);
+
+        mImgMemo.setImageBitmap( rotatedBmp );
+
         Toast.makeText(getActivity(), "사진경로: " + mPhotoPath, Toast.LENGTH_LONG).show();
     }
 

@@ -192,7 +192,7 @@ public class CameraCaptureActivity extends AppCompatActivity {
                     } else {
                         exifDegree = 0;
                     }
-                    Bitmap rotatedBmp = roate(resizedBmp, exifDegree);
+                    Bitmap rotatedBmp = roate(resizedBmp, 0);
                     mImgProfile.setImageBitmap( rotatedBmp );
 
                     //줄어든 이미지를 다시 저장한다

@@ -25,13 +25,14 @@
 
             <ImageView
                 android:id="@+id/imageView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="100dp"
+                android:layout_height="150dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginRight="5dp"
                 android:layout_marginBottom="10dp"
                 android:layout_weight="1"
+                android:scaleType="fitXY"
                 app:srcCompat="@drawable/android2" />
         </LinearLayout>
 
