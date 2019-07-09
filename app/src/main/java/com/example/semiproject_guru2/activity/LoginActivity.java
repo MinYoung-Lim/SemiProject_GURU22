@@ -47,10 +47,10 @@ public class LoginActivity extends AppCompatActivity {
                 String memId = mEdtId.getText().toString();
                 MemberBean memberBean = FileDB.getFindMember(LoginActivity.this, memId);
                 if(memberBean==null){
-                   mEdtId.setBackgroundColor(Color.RED);
+                   mEdtId.setTextColor(Color.RED);
                 }
                 else{
-                    mEdtId.setBackgroundColor(Color.WHITE);
+                    mEdtId.setTextColor(Color.BLACK);
                 }
                 //charSequence.toString()
             }
