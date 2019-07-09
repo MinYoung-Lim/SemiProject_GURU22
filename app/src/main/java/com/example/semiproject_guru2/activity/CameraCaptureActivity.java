@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.graphics.Matrix;
 import android.media.ExifInterface;
 import android.net.Uri;
@@ -16,7 +17,9 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -83,6 +86,26 @@ public class CameraCaptureActivity extends AppCompatActivity {
                         }
                     });
 
+        //비밀번호 4자리 이상인지 확인
+        mEdtPw1.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) { }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                String mPw = mEdtPw1.getText().toString();
+                if(mPw.length() < 4){
+                    mEdtPw1.setTextColor(Color.RED);
+                }
+                else{
+                    mEdtPw1.setTextColor(Color.BLACK);
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) { }
+        });
+
                 }//end onCreate()
 
                 //회원가입 처리
@@ -95,6 +118,13 @@ public class CameraCaptureActivity extends AppCompatActivity {
 
                     String pw1 = mEdtPw1.getText().toString();
                     String pw2 = mEdtPw2.getText().toString();
+
+                    //패스워드가 4자리 이상이어야함
+                    if(pw1.length()<4){
+                        //4자리 미만이면
+                        Toast.makeText(this, "패스워드가 4자리 미만입니다.", Toast.LENGTH_LONG).show();
+                        return;
+                    }
                     //서로 패스워드가 일치하는지 확인한다.
                     if( !TextUtils.equals(pw1, pw2) ) {
                         //일치하지 않을경우는
