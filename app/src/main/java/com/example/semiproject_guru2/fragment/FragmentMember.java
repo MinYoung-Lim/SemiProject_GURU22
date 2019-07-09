@@ -4,6 +4,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -49,9 +51,27 @@ public class FragmentMember extends Fragment {
         btnLogout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(getActivity(), LoginActivity.class);
-                startActivity(i);
-                Toast.makeText(getActivity(),"로그아웃...", Toast.LENGTH_LONG).show();
+                AlertDialog.Builder alert = new AlertDialog.Builder(getActivity());
+                alert.setTitle("로그아웃");
+                alert.setMessage("로그아웃 하시겠습니까?");
+
+                alert.setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Intent i = new Intent(getActivity(), LoginActivity.class);
+                        startActivity(i);
+                        Toast.makeText(getActivity(),"로그아웃...", Toast.LENGTH_LONG).show();
+                    }
+                });
+
+                alert.setNegativeButton("취소", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface arg0, int arg1) {
+
+                    }
+                });
+
+                alert.show();
             }
         });
 
