@@ -22,6 +22,9 @@ import com.example.semiproject_guru2.fragment.FragmentCamera;
 import com.example.semiproject_guru2.fragment.FragmentMemoWrite;
 import com.google.android.material.tabs.TabLayout;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class NewMemoActivity extends  AppCompatActivity {
 
     public NewMemoActivity(){}
@@ -98,6 +101,8 @@ public class NewMemoActivity extends  AppCompatActivity {
         MemoBean memobean = new MemoBean();
         memobean.memo = memoStr;
         memobean.memoPicPath = photoPath;
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        memobean.memoDate = sdf.format(new Date());
         MemberBean memberBean = FileDB.getLoginMember( this );
         FileDB.addMemo(this, memberBean.memId, memobean);
         finish();
