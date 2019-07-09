@@ -1,7 +1,9 @@
 
 package com.example.semiproject_guru2.fragment;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -130,11 +132,30 @@ public class FragmentMemo extends Fragment {
             btnDel.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    MemberBean memberBean = FileDB.getLoginMember(getActivity());
-                    FileDB.delMemo(getActivity(), memberBean.memId, item.memoID);
+                    AlertDialog.Builder alert = new AlertDialog.Builder(getActivity());
+                    alert.setTitle("삭제");
+                    alert.setMessage("정말로 삭제 하시겠습니까?");
 
-                    items = FileDB.getMemoList(getActivity(), memberBean.memId);
-                    notifyDataSetChanged(); //갱신해라
+                    alert.setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            final MemberBean loginMember = FileDB.getLoginMember(getActivity());
+                            MemberBean memberBean = FileDB.getLoginMember(getActivity());
+                            FileDB.delMemo(getActivity(), memberBean.memId, item.memoID);
+
+                            items = FileDB.getMemoList(getActivity(), memberBean.memId);
+                            notifyDataSetChanged(); //갱신해라
+                        }
+                    });
+
+                    alert.setNegativeButton("취소", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface arg0, int arg1) {
+
+                        }
+                    });
+
+                    alert.show();
                 }
             });
 
