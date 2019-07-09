@@ -11,12 +11,12 @@
         android:id="@+id/btnNewMemo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:backgroundTint="#77F5AFAF"
+        android:background="@drawable/btn_bg"
         android:text="새 메모 작성"
         android:textColor="#F8F7F7"
         android:textSize="25dp"
         android:textStyle="bold"
-        android:background="@drawable/button_login"/>
+        />
 
     <ListView
         android:id="@+id/lstMemo"

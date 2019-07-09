@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SignUpActivity">
+    >
 
     <LinearLayout
         android:layout_width="397dp"
@@ -71,11 +71,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:backgroundTint="#77F5AFAF"
+                    android:background="@drawable/btn_bg"
                     android:text="수정"
                     android:textColor="#FAFAFA"
                     android:textSize="11dp"
                     android:textStyle="bold"
+                    android:layout_margin="5dp"
                     />
 
                 <Button
@@ -83,22 +84,26 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:backgroundTint="#77F5AFAF"
+                    android:background="@drawable/btn_bg"
                     android:text="삭제"
                     android:textColor="#FAFAFA"
                     android:textSize="11dp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    android:layout_margin="5dp"
+                    />
 
                 <Button
                     android:id="@+id/btnDetail"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:backgroundTint="#77F5AFAF"
+                    android:background="@drawable/btn_bg"
                     android:text="상세보기"
                     android:textColor="#FAFAFA"
                     android:textSize="11dp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    android:layout_margin="5dp"
+                    />
             </LinearLayout>
 
             <TextView

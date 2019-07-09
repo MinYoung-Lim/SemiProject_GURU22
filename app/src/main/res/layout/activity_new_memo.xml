@@ -48,10 +48,9 @@
             android:layout_marginLeft="20dp"
             android:layout_marginRight="10dp"
             android:layout_weight="1"
-            android:backgroundTint="#77F5AFAF"
+            android:background="@drawable/btn_bg"
             android:text="저장"
             android:textSize="20dp"
-            android:background="@drawable/button_login"
             />
 
         <Button
@@ -61,10 +60,9 @@
             android:layout_marginLeft="10dp"
             android:layout_marginRight="20dp"
             android:layout_weight="1"
-            android:backgroundTint="#77F5AFAF"
+            android:background="@drawable/btn_bg"
             android:text="취소"
             android:textSize="20dp"
-            android:background="@drawable/button_login"
             />
     </LinearLayout>
 
