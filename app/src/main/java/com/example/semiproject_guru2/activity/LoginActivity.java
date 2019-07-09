@@ -3,11 +3,15 @@ package com.example.semiproject_guru2.activity;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.example.semiproject_guru2.R;
@@ -32,6 +36,28 @@ public class LoginActivity extends AppCompatActivity {
 
         btnLogin.setOnClickListener(mBtnLoginClick);
         btnJoin.setOnClickListener(mBtnJoinClick);
+
+        mEdtId.addTextChangedListener(new TextWatcher() {
+
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) { }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                String memId = mEdtId.getText().toString();
+                MemberBean memberBean = FileDB.getFindMember(LoginActivity.this, memId);
+                if(memberBean==null){
+                   mEdtId.setBackgroundColor(Color.RED);
+                }
+                else{
+                    mEdtId.setBackgroundColor(Color.WHITE);
+                }
+                //charSequence.toString()
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) { }
+        });
 
     }//end onCreate()
 
