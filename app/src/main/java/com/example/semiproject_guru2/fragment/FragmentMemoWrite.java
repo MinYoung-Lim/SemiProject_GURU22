@@ -39,7 +39,10 @@ public class FragmentMemoWrite extends Fragment {
         long memoId = getActivity().getIntent().getLongExtra("memoId", -1);
         MemberBean memberBean = FileDB.getLoginMember( getActivity() );
         MemoBean memoBean = FileDB.getMemo(getActivity(), memberBean.memId, memoId );
-        edtWriteMemo.setText(memoBean.memo);
+        if(memoBean!=null) {
+            edtWriteMemo.setText(memoBean.memo);
+        }
+
         return view;
     }
 
