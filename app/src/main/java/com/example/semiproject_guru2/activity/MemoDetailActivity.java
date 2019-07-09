@@ -6,52 +6,37 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
-import android.widget.EditText;
-import android.widget.Toast;
+import android.widget.Button;
 
 import com.example.semiproject_guru2.R;
-import com.example.semiproject_guru2.bean.MemberBean;
-import com.example.semiproject_guru2.bean.MemoBean;
-import com.example.semiproject_guru2.database.FileDB;
 import com.example.semiproject_guru2.fragment.FragmentCamera;
+import com.example.semiproject_guru2.fragment.FragmentMemo;
 import com.example.semiproject_guru2.fragment.FragmentMemoWrite;
 import com.google.android.material.tabs.TabLayout;
 
-public class ModifyMemoActivity extends AppCompatActivity {
+public class MemoDetailActivity extends AppCompatActivity {
 
     private TabLayout tabLayout2;  // Tab 영역
     private ViewPager viewPager2;  // 표시할 영역
     private MyPagerAdapter mMyPagerAdapter;
-    private long mMemoId;
+    public long memoId;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_modify);
-        View.OnClickListener mBtnClick = new View.OnClickListener(){
+        setContentView(R.layout.activity_memo_detail);
+
+        Button btnBack = findViewById(R.id.btnBack);
+
+        btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                switch (view.getId()){
-                    case R.id.btnCancel:
-                        finish();
-                        break;
-                    case R.id.btnSave:
-                        //처리
-                        saveProc();
-                        break;
-                }
+                finish();
             }
-        };
-
-        mMemoId = getIntent().getLongExtra("memoId", -1);
-
-        findViewById(R.id.btnCancel).setOnClickListener(mBtnClick);
-        findViewById(R.id.btnSave).setOnClickListener(mBtnClick);
+        });
 
         tabLayout2 = findViewById(R.id.tabLayout2);
         viewPager2 = findViewById(R.id.viewPager2);
@@ -62,8 +47,7 @@ public class ModifyMemoActivity extends AppCompatActivity {
         tabLayout2.setTabGravity(TabLayout.GRAVITY_FILL);
 
         // ViewPager 생성
-        mMyPagerAdapter = new MyPagerAdapter(getSupportFragmentManager(),
-                tabLayout2.getTabCount());
+        mMyPagerAdapter = new MyPagerAdapter(getSupportFragmentManager(), tabLayout2.getTabCount());
         viewPager2.setAdapter(mMyPagerAdapter);
         viewPager2.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout2));
         tabLayout2.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
@@ -78,32 +62,6 @@ public class ModifyMemoActivity extends AppCompatActivity {
             @Override
             public void onTabReselected(TabLayout.Tab tab) { }
         });
-    }
-    //저장버튼 저장처리
-    private void saveProc() {
-
-        //1.첫번째 프래그먼트의 EditText 값을 받아온다.
-        FragmentMemoWrite f0 = (FragmentMemoWrite)mMyPagerAdapter.instantiateItem(viewPager2,0);
-        //2.두번째 프래그먼트의 mPhotoPath 값을 가져온다.
-        FragmentCamera f1 = (FragmentCamera)mMyPagerAdapter.instantiateItem(viewPager2,1);
-
-        EditText edtWriteMemo = f0.getView().findViewById(R.id.edtWriteMemo);
-        String memoStr = edtWriteMemo.getText().toString();
-        String photoPath = f1.mPhotoPath;
-
-        Log.e("SEMI", "memoStr: " + memoStr + ", photoPath: " + photoPath);
-        Toast.makeText(this, "memoStr: " + memoStr + ", photoPath: " + photoPath, Toast.LENGTH_LONG).show();
-
-        //TODO 파일DB 에 저장처리
-        MemberBean memberBean = FileDB.getLoginMember( this );
-        MemoBean memobean = FileDB.getMemo(this, memberBean.memId, mMemoId);
-        memobean.memo = memoStr;
-        if( !TextUtils.isEmpty(photoPath) ) {
-            memobean.memoPicPath = photoPath;
-        }
-
-        FileDB.setMemo(this, memberBean.memId, memobean);
-        finish();
     }
 
     class MyPagerAdapter extends FragmentPagerAdapter {
@@ -132,4 +90,6 @@ public class ModifyMemoActivity extends AppCompatActivity {
         }
     }
 }
+
+
 

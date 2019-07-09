@@ -15,7 +15,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"
         android:gravity="center"
-        android:text="메모 수정"
+        android:text="메모 상세보기"
         android:textColor="#F83D3D3D"
         android:textSize="30dp"
         android:textStyle="bold" />
@@ -42,26 +42,17 @@
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/btnSave"
+            android:id="@+id/btnBack"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="10dp"
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="40dp"
             android:layout_weight="1"
             android:backgroundTint="#77F5AFAF"
-            android:text="저장"
+            android:text="뒤로가기"
             android:textSize="20dp" />
 
-        <Button
-            android:id="@+id/btnCancel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="20dp"
-            android:layout_weight="1"
-            android:backgroundTint="#77F5AFAF"
-            android:text="취소"
-            android:textSize="20dp" />
+
     </LinearLayout>
 
 </LinearLayout>

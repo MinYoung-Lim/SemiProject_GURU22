@@ -26,6 +26,8 @@ import androidx.fragment.app.Fragment;
 
 import com.example.semiproject_guru2.R;
 import com.example.semiproject_guru2.activity.CameraCaptureActivity;
+import com.example.semiproject_guru2.bean.MemberBean;
+import com.example.semiproject_guru2.database.FileDB;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
@@ -36,7 +38,7 @@ import static android.app.Activity.RESULT_OK;
 public class FragmentCamera extends Fragment {
 
     //사진이 저장된 단말기상의 실제 경로
-    public String mPhotoPath = "/sdcard/hello/world.jpg";  //dummy data
+    public String mPhotoPath = null;  //dummy data
     private Uri mCaptureUri;
     public static final int REQUEST_IMAGE_CAPTURE = 200;
     private ImageView mImgMemo;
@@ -56,6 +58,11 @@ public class FragmentCamera extends Fragment {
                 takePicture();
             }
         });
+
+        String memoPicPath = getActivity().getIntent().getStringExtra("memoPicPath");
+        if(memoPicPath!=null) {
+            mImgMemo.setImageURI(Uri.fromFile(new File(memoPicPath)));
+        }
 
         return view;
 

@@ -125,8 +125,24 @@ public class FileDB {
     }
 
     //기존 메모 교체
-    public static void setMemo (Context context, String memId, MemoBean memoBean){
+    public static void setMemo (Context context, String memId, MemoBean memoBean2){
         //TODO
+        MemberBean findMember = getFindMember(context, memId);
+        if(findMember == null) return;
+
+        List <MemoBean> memoList = findMember.memoList;
+        for(int i=0; i<memoList.size(); i++) {
+            MemoBean memoBean = memoList.get(i);
+            if(memoBean.memoID == memoBean2.memoID) {
+                memoBean.memo = memoBean2.memo;
+                memoBean.memoPicPath = memoBean2.memoPicPath;
+                memoList.set(i, memoBean);
+                break;
+            }
+        }
+        findMember.memoList = memoList;
+        //저장
+        setMember(context, findMember);
 
     }
 
@@ -148,6 +164,20 @@ public class FileDB {
         //저장
         findMember.memoList = memoList;
         setMember(context, findMember);
+    }
+
+    public static MemoBean getMemo(Context context, String memId, long memoId){
+        //TODO
+        MemberBean findMember = getFindMember(context, memId);
+        List <MemoBean> memoList = findMember.memoList;
+
+        for(int i=0; i<memoList.size(); i++) {
+            MemoBean memoBean = memoList.get(i);
+            if(memoBean.memoID == memoId) {
+                return memoBean;
+            }
+        }
+        return null;
     }
 
     //메모 리스트 취득

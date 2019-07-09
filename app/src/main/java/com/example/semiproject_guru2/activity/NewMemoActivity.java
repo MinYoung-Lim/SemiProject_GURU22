@@ -103,30 +103,29 @@ public class NewMemoActivity extends  AppCompatActivity {
         finish();
     }
 
+   class MyPagerAdapter extends FragmentPagerAdapter {
+    int tabSize;  // TAB 수
 
-    class MyPagerAdapter extends FragmentPagerAdapter {
-        int tabSize;  // TAB 수
-
-        public MyPagerAdapter(FragmentManager fm, int count) {
-            super(fm);
-            this.tabSize = count;  // 탭의 수
-        }
-
-        @Override
-        public Fragment getItem(int position) {
-            switch (position){
-                case 0:
-                    return new FragmentMemoWrite();
-                case 1:
-                    return new FragmentCamera();
-            }
-
-            return null;
-        }
-
-        @Override
-        public int getCount() {
-            return this.tabSize;
-        }
+    public MyPagerAdapter(FragmentManager fm, int count) {
+        super(fm);
+        this.tabSize = count;  // 탭의 수
     }
+
+    @Override
+    public Fragment getItem(int position) {
+        switch (position){
+            case 0:
+                return new FragmentMemoWrite();
+            case 1:
+                return new FragmentCamera();
+        }
+
+        return null;
+    }
+
+    @Override
+    public int getCount() {
+        return this.tabSize;
+    }
+}
 }
