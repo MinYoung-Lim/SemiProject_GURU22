@@ -112,6 +112,7 @@ public class FragmentMemo extends Fragment {
             // 객체 획득
             ImageView imgView = view.findViewById(R.id.imageView);
             final TextView txtMemo = view.findViewById(R.id.txt_memo);
+            TextView txtMemoDate = view.findViewById(R.id.txtMemoDate);
             Button btnDel = view.findViewById(R.id.btnDel);
             Button btnDetail = view.findViewById(R.id.btnDetail);
             Button btnRevise = view.findViewById(R.id.btnRevise);
@@ -124,6 +125,7 @@ public class FragmentMemo extends Fragment {
                 imgView.setImageURI( Uri.fromFile(new File(item.memoPicPath)));
             }
             txtMemo.setText(item.memo);
+            txtMemoDate.setText(item.memoDate);
 
             btnDel.setOnClickListener(new View.OnClickListener() {
                 @Override
